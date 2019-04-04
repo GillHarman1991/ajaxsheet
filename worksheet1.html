@@ -1,40 +1,38 @@
 <html>
-    <head>
-        <script language="javascript">
-            var XHobj=false;
-            if(window.XMLHttpRequest)
-            {}
-                XHobj=new ActiveXObject("Microsoft.XMLHTTP");
-
-            }
-            else if(windows.ActiveXObject)
+<head>
+    <script language="javascript">
+    var XHobj = false;
+    if(window.XMLHttpRequest)
+    {
+        //code for IE6, IE5, Google chrome, Firefox web browser
+        XHobj = new XMLHttpRequest();
+    }
+    else if(window.ActiveXobject)
+    {
+        //code for IE6, IE5
+        XHobj = new ActiveXobject("Microsoft.XMLHTTP");
+    }
+    function fetchdata(datasource,divID)
+    {
+        if(XHobj)
+        {
+            XHobj.open("GET",datasource);
+            XHobj.onreadystatechange=function()
             {
-                XHobj=new ActiveXObject("Microsoft.XMLHTTP");
-                function fetchdata(datasource.divID)
-                {
-                    if(XHobj)
-                    {
-                        XHobj.open("GET",datasource);
-                        XHobj.onereadystatechange=function()
-
-                        {
-                            if(XHobj.readyState==4 && XHobj.status==200)
-                        }
-                        document.getElementById(divID).innerHTML=XHobj.responseText;
-                    }
-
-                    
-
-                }
-                Xobj.send(null);
+                if(XHobj.readyState==4 && XHobj.status==200)
+                    document.getElementById(divID).innerHTML += XHobj.responseText;
             }
-        </script>
-    </head>
-    <body>
-        <h3>Welcome to ajax</h3>
-        <form>
-            <input type="button" value="Fetch Message" onclick=""fetchdata('info.txt','myDiv')">
-        <div id="myDiv"><b>AJAX application are browser and platform independent</b></div>
-        </form>
-    </body>
+            XHobj.send();
+        }
+    }
+        
+    </script>
+</head>
+<body>
+    <h3> Welcome to AJAX </h3>
+    <form>
+    <input type = button value = "Fetch Message" onclick = "fetchdata('info.txt','myDiv')">
+    </form>
+    <div id = "myDiv"> <b> AJAX applications are browser and platform independent.:</b></div>
+</body>
 </html>
